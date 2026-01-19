@@ -3,150 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Portal | RAC HSS Katameri</title>
+    <title>RAC HSS Portal | Student & Faculty</title>
     <style>
         :root {
             --primary: #003366;
             --faculty-green: #1b5e20;
             --accent: #f1c40f;
-            --light-bg: #f4f7f6;
+            --bg: #f0f2f5;
+            --white: #ffffff;
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light-bg); }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; }
 
         /* --- HEADER --- */
-        header { background: var(--primary); color: white; padding: 20px 5%; text-align: center; border-bottom: 4px solid var(--accent); }
-        nav { background: #002244; display: flex; justify-content: center; padding: 10px 0; }
-        nav a { color: white; text-decoration: none; padding: 8px 15px; font-weight: bold; }
+        header { 
+            background: var(--primary); color: white; padding: 20px; 
+            text-align: center; border-bottom: 4px solid var(--accent); 
+        }
 
-        /* --- LOGIN --- */
-        #login-section { display: flex; justify-content: center; padding: 60px 20px; }
-        .login-box { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 350px; text-align: center; }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
-        .btn-login { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        nav { background: #002244; display: flex; justify-content: center; padding: 10px; }
+        nav a { color: white; text-decoration: none; padding: 0 15px; font-weight: bold; }
 
-        /* --- FACULTY DASHBOARD LAYOUT --- */
-        #faculty-dashboard { display: none; max-width: 1200px; margin: 20px auto; padding: 20px; }
-        .fac-grid { display: grid; grid-template-columns: 250px 1fr; gap: 20px; }
-        .sidebar { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: fit-content; }
-        .sidebar button { width: 100%; padding: 12px; margin-bottom: 10px; border: none; background: #eee; text-align: left; cursor: pointer; border-radius: 5px; font-weight: bold; }
-        .sidebar button.active { background: var(--faculty-green); color: white; }
+        /* --- LOGIN BOX --- */
+        #login-section { display: flex; justify-content: center; padding: 50px 20px; }
+        .login-card { 
+            background: var(--white); padding: 30px; border-radius: 12px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1); width: 100%; max-width: 380px; text-align: center; 
+        }
+        input { 
+            width: 100%; padding: 12px; margin: 10px 0; 
+            border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; 
+        }
+        .login-btn { 
+            width: 100%; padding: 12px; background: var(--primary); 
+            color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; 
+        }
 
-        .content-area { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        /* --- DASHBOARDS --- */
+        .container { display: none; max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .card { background: var(--white); padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
         
-        /* Tables */
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 12px; border: 1px solid #eee; text-align: left; }
-        th { background: #f8f9fa; color: var(--primary); }
+        .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
 
-        .hidden { display: none; }
-        .badge-kites { background: #00acee; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px; border: 1px solid #eee; text-align: left; }
+        th { background: #f8f9fa; }
+
+        /* Utility */
+        .error { color: red; font-size: 0.85rem; display: none; margin-bottom: 10px; }
+        .logout-btn { background: #d32f2f; color: white; padding: 5px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        .badge { padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; color: white; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0;">RAC HSS PORTAL</h1>
-    <div id="portal-subtitle">OFFICIAL FACULTY & STUDENT ACCESS</div>
+    <h1>RAC HSS KATAMERI PORTAL</h1>
+    <p>Management System for Students & Faculty</p>
 </header>
 
 <nav>
     <a href="index.html">🏠 HOME</a>
-    <a href="#" onclick="location.reload()">LOGOUT</a>
+    <a href="about.html">ABOUT</a>
+    <a href="facilities.html">FACILITIES</a>
 </nav>
 
-<div id="login-section">
-    <div class="login-box">
-        <h2 id="login-title">Faculty/Student Login</h2>
-        <input type="text" id="username" placeholder="Username (admin / 101)">
-        <input type="password" id="password" placeholder="Password (123 / pass123)">
-        <p id="error" style="color:red; display:none;">Invalid Credentials!</p>
-        <button class="btn-login" onclick="handleLogin()">Access Dashboard</button>
+<section id="login-section">
+    <div class="login-card">
+        <h2 id="login-label">Secure Login</h2>
+        <p style="color:#666; font-size: 0.9rem;">Enter ID and Password</p>
+        <div id="error-msg" class="error">❌ Invalid Credentials</div>
+        
+        <input type="text" id="userid" placeholder="User ID (admin or 101)">
+        <input type="password" id="password" placeholder="Password (123 or pass123)">
+        
+        <button class="login-btn" onclick="login()">Login to Dashboard</button>
+        <p style="font-size: 0.8rem; margin-top: 15px; color: #888;">Powered by Little Kites RAC HSS</p>
+    </div>
+</section>
+
+<div id="student-view" class="container">
+    <div style="display:flex; justify-content: space-between;">
+        <h2 id="st-name">Welcome, Student</h2>
+        <button class="logout-btn" onclick="location.reload()">Logout</button>
+    </div>
+    
+    <div class="grid">
+        <div class="main">
+            <div class="card">
+                <h3>Academic Summary</h3>
+                <div style="display:flex; gap: 20px;">
+                    <div style="background:#e3f2fd; padding:15px; border-radius:8px; flex:1;">
+                        <strong>Attendance:</strong> <span id="st-att">0%</span>
+                    </div>
+                    <div style="background:#fff3e0; padding:15px; border-radius:8px; flex:1;">
+                        <strong>Current Grade:</strong> <span id="st-grade">-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Extracurricular Wing</h3>
+                <p><strong>Enrolled Club:</strong> <span id="st-club">Loading...</span></p>
+                <p><strong>Assigned Task:</strong> <span id="st-task">No tasks pending.</span></p>
+            </div>
+        </div>
+        <div class="side">
+            <div class="card" style="border-top: 4px solid var(--accent);">
+                <h3>Announcements</h3>
+                <ul style="padding-left: 20px; font-size: 0.9rem;">
+                    <li>SSLC Model Exam starts Feb 15.</li>
+                    <li>Little Kites Meet on Friday.</li>
+                    <li>SPC Parade Uniform Check.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="faculty-dashboard">
-    <div class="fac-grid">
-        <div class="sidebar">
-            <h3 style="color: var(--faculty-green);">Teacher Menu</h3>
-            <button class="tab-link active" onclick="openTab(event, 'attendance')">Mark Attendance</button>
-            <button class="tab-link" onclick="openTab(event, 'marks')">Grade Entry</button>
-            <button class="tab-link" onclick="openTab(event, 'students')">Student List</button>
-        </div>
+<div id="faculty-view" class="container">
+    <div style="display:flex; justify-content: space-between;">
+        <h2 style="color: var(--faculty-green);">Faculty Administration</h2>
+        <button class="logout-btn" onclick="location.reload()">Logout</button>
+    </div>
 
-        <div class="content-area">
-            <div id="attendance" class="tab-content">
-                <h2>Daily Attendance - Class 10A</h2>
-                <p>Date: <span id="current-date"></span></p>
-                <table>
-                    <tr><th>Roll</th><th>Name</th><th>Status</th><th>Password (Reset)</th></tr>
-                    <tr><td>01</td><td>Abhirami K.</td><td><input type="checkbox" checked> Present</td><td><input type="text" value="kites26" style="width:80px"></td></tr>
-                    <tr><td>02</td><td>Adarsh P.</td><td><input type="checkbox" checked> Present</td><td><input type="text" value="spc2026" style="width:80px"></td></tr>
-                    <tr><td>03</td><td>Fathima R.</td><td><input type="checkbox"> Absent</td><td><input type="text" value="rac673" style="width:80px"></td></tr>
-                </table>
-                <button class="btn-login" style="background: var(--faculty-green); margin-top: 20px;" onclick="alert('Attendance Saved!')">Submit Attendance</button>
-            </div>
-
-            <div id="marks" class="tab-content hidden">
-                <h2>Internal Mark Entry</h2>
-                <select style="width: 200px;">
-                    <option>Malayalam</option>
-                    <option>IT (Little Kites)</option>
-                    <option>Mathematics</option>
-                </select>
-                <table>
-                    <tr><th>Roll</th><th>Name</th><th>Internal (Max 20)</th><th>Grade</th></tr>
-                    <tr><td>01</td><td>Abhirami K.</td><td><input type="number" value="19" style="width:50px"></td><td>A+</td></tr>
-                    <tr><td>02</td><td>Adarsh P.</td><td><input type="number" value="15" style="width:50px"></td><td>A</td></tr>
-                </table>
-                <button class="btn-login" style="background: var(--faculty-green); margin-top: 20px;">Save Marks</button>
-            </div>
-
-            <div id="students" class="tab-content hidden">
-                <h2>Registered Students</h2>
-                <table>
-                    <tr><th>Roll</th><th>Name</th><th>Club</th><th>Status</th></tr>
-                    <tr><td>01</td><td>Abhirami K.</td><td><span class="badge-kites">Little Kites</span></td><td>Active</td></tr>
-                    <tr><td>02</td><td>Adarsh P.</td><td><span class="badge-kites" style="background:navy">SPC</span></td><td>Active</td></tr>
-                </table>
-            </div>
-        </div>
+    <div class="card">
+        <h3>Class 10-A Management</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Roll</th>
+                    <th>Student Name</th>
+                    <th>Club</th>
+                    <th>Attendance</th>
+                    <th>Internal Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>101</td><td>Rahul C.</td><td><span class="badge" style="background:#00acee">Little Kites</span></td><td>94%</td><td><input type="number" value="19" style="width:40px"></td></tr>
+                <tr><td>102</td><td>Sreya P.</td><td><span class="badge" style="background:navy">SPC</span></td><td>89%</td><td><input type="number" value="18" style="width:40px"></td></tr>
+                <tr><td>103</td><td>Muhammed K.</td><td><span class="badge" style="background:#2e7d32">Scouts</span></td><td>92%</td><td><input type="number" value="20" style="width:40px"></td></tr>
+            </tbody>
+        </table>
+        <button class="login-btn" style="background: var(--faculty-green); margin-top:15px; width:200px;">Save All Changes</button>
     </div>
 </div>
 
 <script>
-    // Set Date
-    document.getElementById('current-date').innerText = new Date().toLocaleDateString();
+    // --- USER DATABASE ---
+    const students = {
+        "101": { pass: "pass123", name: "Rahul C.", att: "94%", grade: "A+", club: "Little Kites", task: "Design Portal UI" },
+        "102": { pass: "pass123", name: "Sreya P.", att: "89%", grade: "A", club: "SPC", task: "Saturday Parade" },
+        "103": { pass: "pass123", name: "Muhammed K.", att: "92%", grade: "B+", club: "Scouts", task: "Knot Tying Practice" }
+    };
 
-    function handleLogin() {
-        const u = document.getElementById('username').value;
-        const p = document.getElementById('password').value;
+    const faculty = { id: "admin", pass: "123" };
 
-        if(u === 'admin' && p === '123') {
-            // FACULTY LOGIN
+    function login() {
+        const id = document.getElementById('userid').value;
+        const pass = document.getElementById('password').value;
+        const errMsg = document.getElementById('error-msg');
+
+        // Faculty Login Check
+        if (id === faculty.id && pass === faculty.pass) {
             document.getElementById('login-section').style.display = 'none';
-            document.getElementById('faculty-dashboard').style.display = 'block';
-            document.getElementById('portal-subtitle').innerText = "FACULTY ADMINISTRATION PANEL";
-        } else if(u === '101' && p === 'pass123') {
-            // STUDENT LOGIN (Simple Alert for demo)
-            alert("Student Dashboard is loading... (Same logic as previous code)");
-        } else {
-            document.getElementById('error').style.display = 'block';
+            document.getElementById('faculty-view').style.display = 'block';
+            return;
         }
-    }
 
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].classList.add("hidden");
+        // Student Login Check
+        if (students[id] && students[id].pass === pass) {
+            const user = students[id];
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('student-view').style.display = 'block';
+            
+            // Populate Data
+            document.getElementById('st-name').innerText = "Welcome, " + user.name;
+            document.getElementById('st-att').innerText = user.att;
+            document.getElementById('st-grade').innerText = user.grade;
+            document.getElementById('st-club').innerText = user.club;
+            document.getElementById('st-task').innerText = user.task;
+        } else {
+            errMsg.style.display = 'block';
         }
-        tablinks = document.getElementsByClassName("tab-link");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active");
-        }
-        document.getElementById(tabName).classList.remove("hidden");
-        evt.currentTarget.classList.add("active");
     }
 </script>
 
