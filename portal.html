@@ -3,186 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Integrated Portal | RAC HSS Katameri</title>
+    <title>Faculty Portal | RAC HSS Katameri</title>
     <style>
         :root {
             --primary: #003366;
-            --student-accent: #2196F3;
-            --faculty-accent: #2e7d32;
-            --gold: #f1c40f;
-            --light-bg: #f0f2f5;
+            --faculty-green: #1b5e20;
+            --accent: #f1c40f;
+            --light-bg: #f4f7f6;
         }
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light-bg); }
 
-        /* --- LOGIN SCREEN STYLE --- */
-        #login-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+        /* --- HEADER --- */
+        header { background: var(--primary); color: white; padding: 20px 5%; text-align: center; border-bottom: 4px solid var(--accent); }
+        nav { background: #002244; display: flex; justify-content: center; padding: 10px 0; }
+        nav a { color: white; text-decoration: none; padding: 8px 15px; font-weight: bold; }
 
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 350px;
-        }
+        /* --- LOGIN --- */
+        #login-section { display: flex; justify-content: center; padding: 60px 20px; }
+        .login-box { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        .btn-login { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-        .role-selector {
-            display: flex;
-            background: #eee;
-            padding: 5px;
-            border-radius: 25px;
-            margin-bottom: 20px;
-        }
+        /* --- FACULTY DASHBOARD LAYOUT --- */
+        #faculty-dashboard { display: none; max-width: 1200px; margin: 20px auto; padding: 20px; }
+        .fac-grid { display: grid; grid-template-columns: 250px 1fr; gap: 20px; }
+        .sidebar { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: fit-content; }
+        .sidebar button { width: 100%; padding: 12px; margin-bottom: 10px; border: none; background: #eee; text-align: left; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        .sidebar button.active { background: var(--faculty-green); color: white; }
 
-        .role-selector button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .role-selector .active { background: var(--primary); color: white; }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* --- DASHBOARD STYLE --- */
-        #dashboard { display: none; height: 100vh; grid-template-columns: 250px 1fr; }
-
-        .sidebar { background: var(--primary); color: white; padding: 25px; }
-        .main-content { padding: 40px; overflow-y: auto; }
-
-        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
-        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .content-area { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         
-        .student-theme { border-top: 5px solid var(--student-accent); }
-        .faculty-theme { border-top: 5px solid var(--faculty-accent); }
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #eee; text-align: left; }
+        th { background: #f8f9fa; color: var(--primary); }
 
-        .logout-btn {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border: 1px solid white;
-            padding: 10px;
-            width: 100%;
-            margin-top: 50px;
-            cursor: pointer;
-        }
+        .hidden { display: none; }
+        .badge-kites { background: #00acee; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<div id="login-screen">
+<header>
+    <h1 style="margin:0;">RAC HSS PORTAL</h1>
+    <div id="portal-subtitle">OFFICIAL FACULTY & STUDENT ACCESS</div>
+</header>
+
+<nav>
+    <a href="index.html">🏠 HOME</a>
+    <a href="#" onclick="location.reload()">LOGOUT</a>
+</nav>
+
+<div id="login-section">
     <div class="login-box">
-        <h2 style="color: var(--primary);">RAC HSS Portal</h2>
-        <div class="role-selector">
-            <button id="btnStud" class="active" onclick="selectRole('student')">Student</button>
-            <button id="btnFac" onclick="selectRole('faculty')">Faculty</button>
-        </div>
-        <input type="text" id="username" placeholder="Enter ID (Try: stud123 or fac123)">
-        <input type="password" placeholder="Password">
-        <button class="btn-login" onclick="handleLogin()">Login to Dashboard</button>
+        <h2 id="login-title">Faculty/Student Login</h2>
+        <input type="text" id="username" placeholder="Username (admin / 101)">
+        <input type="password" id="password" placeholder="Password (123 / pass123)">
+        <p id="error" style="color:red; display:none;">Invalid Credentials!</p>
+        <button class="btn-login" onclick="handleLogin()">Access Dashboard</button>
     </div>
 </div>
 
-<div id="dashboard">
-    <div class="sidebar">
-        <h3 id="side-title">Portal</h3>
-        <hr>
-        <div id="menu-items">
-            </div>
-        <button class="logout-btn" onclick="location.reload()">Logout</button>
-    </div>
+<div id="faculty-dashboard">
+    <div class="fac-grid">
+        <div class="sidebar">
+            <h3 style="color: var(--faculty-green);">Teacher Menu</h3>
+            <button class="tab-link active" onclick="openTab(event, 'attendance')">Mark Attendance</button>
+            <button class="tab-link" onclick="openTab(event, 'marks')">Grade Entry</button>
+            <button class="tab-link" onclick="openTab(event, 'students')">Student List</button>
+        </div>
 
-    <div class="main-content">
-        <h2 id="welcome-msg">Welcome</h2>
-        
-        <div class="card-grid" id="stats-grid">
+        <div class="content-area">
+            <div id="attendance" class="tab-content">
+                <h2>Daily Attendance - Class 10A</h2>
+                <p>Date: <span id="current-date"></span></p>
+                <table>
+                    <tr><th>Roll</th><th>Name</th><th>Status</th><th>Password (Reset)</th></tr>
+                    <tr><td>01</td><td>Abhirami K.</td><td><input type="checkbox" checked> Present</td><td><input type="text" value="kites26" style="width:80px"></td></tr>
+                    <tr><td>02</td><td>Adarsh P.</td><td><input type="checkbox" checked> Present</td><td><input type="text" value="spc2026" style="width:80px"></td></tr>
+                    <tr><td>03</td><td>Fathima R.</td><td><input type="checkbox"> Absent</td><td><input type="text" value="rac673" style="width:80px"></td></tr>
+                </table>
+                <button class="btn-login" style="background: var(--faculty-green); margin-top: 20px;" onclick="alert('Attendance Saved!')">Submit Attendance</button>
             </div>
 
-        <div class="card">
-            <h3>Recent Announcements</h3>
-            <p id="announcement">Loading announcements...</p>
+            <div id="marks" class="tab-content hidden">
+                <h2>Internal Mark Entry</h2>
+                <select style="width: 200px;">
+                    <option>Malayalam</option>
+                    <option>IT (Little Kites)</option>
+                    <option>Mathematics</option>
+                </select>
+                <table>
+                    <tr><th>Roll</th><th>Name</th><th>Internal (Max 20)</th><th>Grade</th></tr>
+                    <tr><td>01</td><td>Abhirami K.</td><td><input type="number" value="19" style="width:50px"></td><td>A+</td></tr>
+                    <tr><td>02</td><td>Adarsh P.</td><td><input type="number" value="15" style="width:50px"></td><td>A</td></tr>
+                </table>
+                <button class="btn-login" style="background: var(--faculty-green); margin-top: 20px;">Save Marks</button>
+            </div>
+
+            <div id="students" class="tab-content hidden">
+                <h2>Registered Students</h2>
+                <table>
+                    <tr><th>Roll</th><th>Name</th><th>Club</th><th>Status</th></tr>
+                    <tr><td>01</td><td>Abhirami K.</td><td><span class="badge-kites">Little Kites</span></td><td>Active</td></tr>
+                    <tr><td>02</td><td>Adarsh P.</td><td><span class="badge-kites" style="background:navy">SPC</span></td><td>Active</td></tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    let selectedRole = 'student';
-
-    function selectRole(role) {
-        selectedRole = role;
-        document.getElementById('btnStud').classList.toggle('active', role === 'student');
-        document.getElementById('btnFac').classList.toggle('active', role === 'faculty');
-    }
+    // Set Date
+    document.getElementById('current-date').innerText = new Date().toLocaleDateString();
 
     function handleLogin() {
-        const user = document.getElementById('username').value;
-        
-        // Simple logic for the project
-        if(user.includes('stud') || selectedRole === 'student') {
-            loadDashboard('student');
-        } else if (user.includes('fac') || selectedRole === 'faculty') {
-            loadDashboard('faculty');
+        const u = document.getElementById('username').value;
+        const p = document.getElementById('password').value;
+
+        if(u === 'admin' && p === '123') {
+            // FACULTY LOGIN
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('faculty-dashboard').style.display = 'block';
+            document.getElementById('portal-subtitle').innerText = "FACULTY ADMINISTRATION PANEL";
+        } else if(u === '101' && p === 'pass123') {
+            // STUDENT LOGIN (Simple Alert for demo)
+            alert("Student Dashboard is loading... (Same logic as previous code)");
         } else {
-            alert("Please enter a valid ID");
+            document.getElementById('error').style.display = 'block';
         }
     }
 
-    function loadDashboard(role) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'grid';
-
-        const menu = document.getElementById('menu-items');
-        const stats = document.getElementById('stats-grid');
-
-        if(role === 'student') {
-            document.getElementById('side-title').innerText = "Student Portal";
-            document.getElementById('welcome-msg').innerText = "Welcome back, Student!";
-            document.getElementById('announcement').innerText = "The Mid-term exam results for Class 10 have been published.";
-            
-            menu.innerHTML = `<p>📅 Timetable</p><p>📝 Assignments</p><p>📊 Exam Results</p>`;
-            stats.innerHTML = `
-                <div class="card student-theme"><h3>88%</h3><p>Attendance</p></div>
-                <div class="card student-theme"><h3>A+</h3><p>Overall Grade</p></div>
-                <div class="card student-theme"><h3>4</h3><p>Pending Tasks</p></div>
-            `;
-        } else {
-            document.getElementById('side-title').innerText = "Faculty Portal";
-            document.getElementById('welcome-msg').innerText = "Staff Dashboard: RAC HSS";
-            document.getElementById('announcement').innerText = "Staff meeting scheduled for Friday at 3:30 PM in the Conference Hall.";
-
-            menu.innerHTML = `<p>✅ Mark Attendance</p><p>📈 Grade Entry</p><p>📂 Study Materials</p>`;
-            stats.innerHTML = `
-                <div class="card faculty-theme"><h3>145</h3><p>Total Students</p></div>
-                <div class="card faculty-theme"><h3>6</h3><p>Classes Today</p></div>
-                <div class="card faculty-theme"><h3>12</h3><p>Pending Evaluations</p></div>
-            `;
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.add("hidden");
         }
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.remove("hidden");
+        evt.currentTarget.classList.add("active");
     }
 </script>
 
