@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAC HSS Katameri | Official School Website</title>
+    <style>
+        /* Modern Academic Theme */
+        :root {
+            --primary-blue: #003366; 
+            --accent-gold: #f1c40f;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --text-dark: #2c3e50;
+            --footer-bg: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Top Header */
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 25px 5%;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-gold);
+        }
+
+        .school-name { font-size: 2.5rem; margin: 0; letter-spacing: 1px; }
+        .school-loc { font-size: 1.1rem; opacity: 0.9; margin-top: 5px; }
+
+        /* Navigation - FIXED FOR GITHUB */
+        nav {
+            background: #002244;
+            display: flex;
+            justify-content: center;
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            margin: 0 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--accent-gold); }
+
+        /* Scrolling News */
+        .scrolling-news {
+            background: var(--accent-gold);
+            color: #000;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Hero Banner - FIXED LINK */
+        .hero {
+            background: linear-gradient(rgba(0,51,102,0.7), rgba(0,51,102,0.7)), 
+                        url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=1200');
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .section-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        h2 { color: var(--primary-blue); border-bottom: 2px solid var(--accent-gold); display: inline-block; margin-bottom: 20px; }
+
+        .btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn:hover { background: #004080; transform: translateY(-2px); }
+
+        /* Footer Styling */
+        .main-footer {
+            background-color: var(--footer-bg);
+            color: #ffffff;
+            padding: 60px 5% 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--accent-gold);
+            border-bottom: 2px solid var(--accent-gold);
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column p, .footer-column li { color: #cccccc; font-size: 0.95rem; }
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column ul li { margin-bottom: 10px; }
+        .footer-column a { color: #cccccc; text-decoration: none; transition: 0.3s; }
+        .footer-column a:hover { color: var(--accent-gold); padding-left: 5px; }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .main-container { grid-template-columns: 1fr; }
+            .school-name { font-size: 1.8rem; }
+            .footer-container { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="school-name">RAC HIGHER SECONDARY SCHOOL</h1>
+    <div class="school-loc">KATAMERI, KOZHIKODE, KERALA - 673542</div>
+</header>
+
+<div class="scrolling-news">
+    <marquee>Notice: Higher Secondary Admission 2026 Process Started | SSLC Model Exams Begin Next Week | Annual Sports Meet Postponed to Friday</marquee>
+</div>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About School</a>
+    <a href="facilities.html">Facilities</a>
+    
+    <a href="portal.html">Portal</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<section class="hero">
+    <h1>Quality Education, Rooted in Values</h1>
+    <p>Empowering the next generation of Katameri since 1983.</p>
+    <a href="about.html" class="btn" style="background: var(--accent-gold); color: #000; font-weight: bold;">Explore Our History</a>
+</section>
+
+<div class="main-container">
+    <main>
+        <div class="section-card">
+            <h2>Welcome to RAC HSS Katameri</h2>
+            <p>RAC HSS Katameri has been a beacon of knowledge in the Kozhikode district, providing quality education to thousands of students. Our school is committed to fostering academic excellence and moral values.</p>
+            <p>We consist of Grades 8 to 12. As a Private Aided institution, we provide a nurturing environment with a perfect balance of traditional values and modern learning techniques.</p>
+            <a href="about.html" class="btn">Read More About Us</a>
+        </div>
+
+        <div class="section-card">
+            <h2>Quick Glance at Facilities</h2>
+            <ul>
+                <li><strong>50 Classrooms:</strong> Spacious and well-maintained instructional rooms.</li>
+                <li><strong>IT Lab:</strong> 25 functional computers with Computer Aided Learning.</li>
+                <li><strong>Library:</strong> Over 5,700 books for student research and reading.</li>
+                <li><strong>Playground:</strong> Large area for sports and athletics.</li>
+            </ul>
+            <a href="facilities.html" class="btn">View All Facilities</a>
+        </div>
+    </main>
+
+    <aside>
+        <div class="section-card" style="background: #fffbe6; border: 1px solid #ffe58f;">
+            <h2>Notice Board</h2>
+            <p><strong>• JAN 21:</strong> SSLC Pre Model Exams.</p>
+            <hr>
+            <p><strong>• FEB 15:</strong> SSLC Model Exams Start.</p>
+            <hr>
+            <p><strong>• MAR 05:</strong> Public Examination Begins.</p>
+        </div>
+
+        <div class="section-card">
+            <h2>Portal Access</h2>
+            <p>Students and Faculty can access their dedicated dashboards here.</p>
+            <a href="portal.html" class="btn" style="width: 100%; text-align: center; box-sizing: border-box;">Login to Portal</a>
+        </div>
+    </aside>
+</div>
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>RAC HSS Katameri</h3>
+            <p>Established in 1983, our institution has been dedicated to excellence in education for over 40 years in the Thodannur block of Kozhikode.</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Useful Links</h3>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="facilities.html">School Facilities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="portal.html"> Portal</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Contact Info</h3>
+            <p>📍 Katameri PO, Villiappally (via)<br>
+               Kozhikode, Kerala - 673542</p>
+            <p>📞 Phone: 0496 253XXXX</p>
+            <p>📧 Email: rachsskatameri@gmail.com</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2026 RAC Higher Secondary School Katameri. All Rights Reserved.</p>
+        <p>Managed by Pvt. Aided | Rural Thodannur Block</p>
+    </div>
+</footer>
+
+</body>
+</html>

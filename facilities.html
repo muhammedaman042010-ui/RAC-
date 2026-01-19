@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities | RAC HSS Katameri</title>
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --accent-gold: #f1c40f;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: #333;
+        }
+
+        .header-section {
+            background-color: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        /* Facilities Grid */
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .facility-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        .facility-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .facility-content {
+            padding: 25px;
+        }
+
+        .facility-content h3 {
+            color: var(--primary-blue);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .facility-content p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Special Highlights */
+        .highlight-box {
+            background: var(--primary-blue);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .highlight-item {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+            min-width: 200px;
+        }
+
+        .highlight-item h4 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--accent-gold);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-section">
+    <h1>Our Facilities</h1>
+    <p>Providing a World-Class Environment for Learning</p>
+</div>
+
+<div class="container">
+    <p class="intro-text">
+        At RAC HSS Katameri, we believe that modern infrastructure is key to a student's success. 
+        Our campus is equipped with everything needed for academic, physical, and digital growth.
+    </p>
+
+    <div class="facilities-grid">
+        <div class="facility-card">
+            <div class="facility-content">
+                <span class="tag">Digital Learning</span>
+                <h3>💻 Computer Lab</h3>
+                <p>Our Computer Aided Learning (CAL) lab features 25 fully functional computers with high-speed internet access, allowing students to master modern technology.</p>
+            </div>
+        </div>
+
+        <div class="facility-card">
+            <div class="facility-content">
+                <span class="tag">Infrastructure</span>
+                <h3>🏫 Smart Classrooms</h3>
+                <p>With 50 spacious and well-ventilated classrooms, we provide a comfortable environment. All rooms are maintained in excellent condition for daily instruction.</p>
+            </div>
+        </div>
+
+        <div class="facility-card">
+            <div class="facility-content">
+                <span class="tag">Knowledge Hub</span>
+                <h3>📚 School Library</h3>
+                <p>A treasure house of knowledge containing over 5,700 books ranging from academic references to literature, science, and history.</p>
+            </div>
+        </div>
+
+        <div class="facility-card">
+            <div class="facility-content">
+                <span class="tag">Physical Ed</span>
+                <h3>⚽ Playground</h3>
+                <p>Our expansive playground supports various sports activities including football, athletics, and traditional games, encouraging physical fitness.</p>
+            </div>
+        </div>
+
+        <div class="facility-card">
+            <div class="facility-content">
+                <span class="tag">Health</span>
+                <h3>💧 Pure Drinking Water</h3>
+                <p>We provide safe and functional drinking water sourced from our on-campus well, ensuring the health and wellbeing of every student.</p>
+            </div>
+        </div>
+
+        <div class="facility-card">
+            <div class="facility-content">
+                <span class="tag">Nutrition</span>
+                <h3>🍲 School Kitchen</h3>
+                <p>Our mid-day meals are freshly prepared and provided daily within the school premises, adhering to high standards of hygiene and nutrition.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <div class="highlight-item">
+            <h4>50</h4>
+            <p>Classrooms</p>
+        </div>
+        <div class="highlight-item">
+            <h4>25</h4>
+            <p>Functional Toilets</p>
+        </div>
+        <div class="highlight-item">
+            <h4>100%</h4>
+            <p>Electricity Connection</p>
+        </div>
+        <div class="highlight-item">
+            <h4>Pucca</h4>
+            <p>Boundary Wall</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 RAC HSS Katameri | Thodannur Block, Kozhikode</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | RAC HSS Katameri</title>
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --accent-gold: #f1c40f;
+            --bg-light: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        .header-banner {
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: -50px auto 50px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .contact-info, .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--primary-blue);
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent-gold);
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+        }
+
+        .info-item strong {
+            display: block;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+
+        .submit-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #002244;
+        }
+
+        /* Map Placeholder */
+        .map-container {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 400px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-banner">
+    <h1>Contact RAC HSS Katameri</h1>
+    <p>We are here to answer your questions and welcome you to our campus.</p>
+</div>
+
+<div class="main-container">
+    <div class="contact-info">
+        <h2>Get In Touch</h2>
+        
+        <div class="info-item">
+            <strong>📍 Address</strong>
+            <p>RAC Higher Secondary School Katameri,<br>
+            Katameri PO, Villiappally (via),<br>
+            Thodannur Block, Kozhikode, <br>
+            Kerala - 673542</p>
+        </div>
+
+        <div class="info-item">
+            <strong>📞 Phone Numbers</strong>
+            <p>Office: 0496 253XXXX<br>
+            Principal: +91 94XX XX XX XX</p>
+        </div>
+
+        <div class="info-item">
+            <strong>📧 Email</strong>
+            <p>rachsskatameri@gmail.com<br>
+            info@rachsskatameri.edu.in</p>
+        </div>
+
+        <div class="info-item">
+            <strong>⏰ Office Hours</strong>
+            <p>Monday - Friday: 9:30 AM - 4:30 PM<br>
+            Saturday: 9:30 AM - 1:00 PM</p>
+        </div>
+    </div>
+
+    <div class="contact-form">
+        <h2>Send a Message</h2>
+        <form action="#">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Subject</label>
+                <select style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px;">
+                    <option>General Inquiry</option>
+                    <option>Admission Question</option>
+                    <option>Transfer Certificate (TC)</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea rows="5" placeholder="How can we help you?" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.123456789!2d75.6456!3d11.6678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDQwJzA0LjEiTiA3NcKwMzgnNDQuMiJF!5e0!3m2!1sen!2sin!4v1234567890" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 30px; color: #777;">
+    <p>&copy; 2026 RAC Higher Secondary School Katameri. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
