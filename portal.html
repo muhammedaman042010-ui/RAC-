@@ -2,115 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAC HSS | Official CE & Subject Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RAC HSS Katameri | Portal</title>
     <style>
         :root {
-            --primary: #003366;
-            --accent: #f1c40f;
-            --bg: #f4f7f6;
-            --admin: #b71c1c;
-            --faculty: #1b5e20;
+            --primary: #003366; --accent: #f1c40f; --bg: #f4f7f6;
+            --admin: #b71c1c; --faculty: #1b5e20; --text: #333;
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #333; }
-        header { background: var(--primary); color: white; padding: 15px; text-align: center; border-bottom: 4px solid var(--accent); }
-        nav { background: #002244; display: flex; justify-content: center; padding: 10px; }
-        nav a { color: white; text-decoration: none; padding: 0 15px; font-weight: bold; cursor: pointer; }
-        
-        .container { max-width: 1400px; margin: 20px auto; padding: 25px; display: none; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .card { padding: 20px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 20px; }
-        
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.8rem; }
-        th, td { padding: 6px; border: 1px solid #ddd; text-align: center; }
-        th { background: #f8f9fa; color: var(--primary); }
+        body { 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            margin: 0; background: var(--bg); color: var(--text); 
+            line-height: 1.5;
+        }
 
-        .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        header { background: var(--primary); color: white; padding: 15px; text-align: center; border-bottom: 5px solid var(--accent); }
+        header h1 { font-size: 1.2rem; margin: 0; }
+        
+        nav { background: #002244; display: flex; justify-content: space-around; padding: 12px; }
+        nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; cursor: pointer; }
+
+        .container { 
+            width: 95%; max-width: 1400px; margin: 15px auto; 
+            padding: 15px; display: none; background: white; 
+            border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            box-sizing: border-box;
+        }
+
+        .card { padding: 15px; border: 1px solid #eee; border-radius: 10px; margin-bottom: 15px; background: #fff; }
+
+        /* Responsive Grid for Master Admin */
+        .master-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 992px) { .master-grid { grid-template-columns: 380px 1fr; } }
+
+        /* Mobile Table Wrapper */
+        .table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border: 1px solid #ddd; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; font-size: 0.8rem; }
+        th, td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+        th { background: #f8f9fa; color: var(--primary); position: sticky; top: 0; }
+
+        /* Inputs */
+        input, select { font-size: 16px !important; padding: 10px; border: 1px solid #ccc; border-radius: 6px; width: 100%; box-sizing: border-box; margin-bottom: 10px; }
+        .mark-input { width: 50px !important; padding: 5px !important; text-align: center; font-weight: bold; margin-bottom: 0; }
+
+        /* Buttons */
+        .btn { padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; display: inline-block; text-align: center; text-decoration: none; }
         .btn-save { background: var(--faculty); color: white; width: 100%; margin-top: 10px; }
-        .btn-del { background: #d32f2f; color: white; padding: 4px 8px; }
-        
-        input { width: 45px !important; padding: 5px; border: 1px solid #ccc; border-radius: 3px; text-align: center; font-weight: bold; }
-        .sub-header { background: #eef; font-weight: bold; font-size: 0.7rem; }
+        .btn-del { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.75rem; }
+        .btn-backup { background: #546e7a; color: white; margin-top: 10px; width: 100%; }
 
-        .login-card { max-width: 350px; margin: 80px auto; background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .fail { color: #d32f2f; font-weight: bold; }
+        .pass { color: #1b5e20; font-weight: bold; }
 
         @media print {
-            header, nav, .btn, .no-print, .login-card { display: none !important; }
-            body { background: white; }
-            .container { display: block !important; border: 2px solid #000; padding: 30px; width: 100%; margin: 0; }
-            .pdf-header { display: block !important; text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 20px; }
-            .pdf-footer { display: block !important; margin-top: 40px; display: flex; justify-content: space-between; }
-            .fail-text { color: red !important; font-weight: bold; }
+            header, nav, .btn, .no-print, #login-section { display: none !important; }
+            .container { display: block !important; box-shadow: none; width: 100%; border: none; }
+            .pdf-header { display: block !important; text-align: center; border-bottom: 3px double #000; margin-bottom: 20px; }
         }
-        .pdf-header, .pdf-footer { display: none; }
-        .fail-text { color: #d32f2f; }
+        .pdf-header { display: none; }
     </style>
 </head>
 <body>
 
 <header class="no-print">
-    <h1>RAC HIGHER SECONDARY SCHOOL, KATAMERI</h1>
-    <p>CE & Terminal Evaluation Portal</p>
+    <h1>RAC HSS KATAMERI - ACADEMIC PORTAL</h1>
 </header>
 
 <nav class="no-print">
     <a onclick="location.reload()">🏠 LOGOUT</a>
 </nav>
 
-<div id="login-section" class="no-print">
-    <div class="login-card">
-        <h2>Portal Login</h2>
-        <input type="text" id="userid" placeholder="User ID" style="width:100% !important; margin-bottom: 10px;">
-        <input type="password" id="password" placeholder="Password" style="width:100% !important; margin-bottom: 10px;">
-        <button class="btn" style="background:var(--primary); color:white; width:100%" onclick="handleLogin()">Login</button>
-    </div>
+<div id="login-section" class="container" style="display:block; max-width:400px; margin-top: 50px;">
+    <h2 style="text-align:center; color: var(--primary);">System Login</h2>
+    <input type="text" id="userid" placeholder="User ID">
+    <input type="password" id="password" placeholder="Password">
+    <button class="btn btn-save" style="background:var(--primary)" onclick="handleLogin()">Login</button>
 </div>
 
 <div id="master-dashboard" class="container">
-    <h2 style="color: var(--admin);">🛡️ Master Control</h2>
-    <div style="display: grid; grid-template-columns: 300px 1fr; gap: 20px;">
+    <h2 style="color: var(--admin);">🛡️ Master Control Panel</h2>
+    <div class="master-grid">
         <div class="card no-print">
-            <h3>Add User</h3>
-            <input type="text" id="new-name" placeholder="Full Name" style="width:100% !important;">
-            <input type="text" id="new-id" placeholder="User ID" style="width:100% !important;">
-            <select id="new-role" style="width:100%; margin: 10px 0; padding:8px;">
+            <h3>Register New User</h3>
+            <input type="text" id="new-name" placeholder="Full Name">
+            <input type="text" id="new-id" placeholder="User ID">
+            <select id="new-role">
                 <option value="student">Student</option>
                 <option value="faculty">Teacher</option>
             </select>
-            <select id="new-class" style="width:100%; margin: 10px 0; padding:8px;">
-                <option value="10-A">10-A</option>
-                <option value="10-B">10-B</option>
-                <option value="10-C">10-C</option>
-                <option value="10-D">10-D</option>
-                <option value="10-E">10-E</option>
-                <option value="10-F">10-F</option>
-                <option value="10-G">10-G</option>
-                <option value="10-H">10-H</option>
-                <option value="10-I">10-I</option>
-                <option value="10-J">10-J</option>
-                <option value="10-K">10-K</option>
-                <option value="10-L">10-L</option>
-            </select>
-            <input type="password" id="new-pass" placeholder="Password" style="width:100% !important;">
-            <button class="btn btn-save" onclick="addUser()">Register Account</button>
+            <div style="display:flex; gap:10px;">
+                <select id="new-class-num">
+                    <option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option>
+                </select>
+                <select id="new-division">
+                    <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option>
+                    <option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option>
+                </select>
+            </div>
+            <input type="password" id="new-pass" placeholder="Password">
+            <button class="btn btn-save" onclick="addUser()">+ Create Account</button>
+            
+            <hr style="margin:20px 0;">
+            <h3>💾 Data Backup</h3>
+            <button class="btn btn-backup" onclick="exportData()">Download Backup (.json)</button>
+            <label class="btn btn-backup" style="background:#78909c; margin-top:5px;">
+                Upload Backup
+                <input type="file" id="importFile" style="display:none;" onchange="importData(event)">
+            </label>
         </div>
         <div class="card">
-            <h3>User Database</h3>
-            <table>
-                <thead><tr><th>ID</th><th>Name</th><th>Class</th><th>Role</th><th>Action</th></tr></thead>
-                <tbody id="master-body"></tbody>
-            </table>
+            <h3>Database Management</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>ID</th><th>Name</th><th>Class-Div</th><th>Role</th><th>Action</th></tr></thead>
+                    <tbody id="master-body"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
 <div id="teacher-dashboard" class="container">
-    <h2 style="color: var(--faculty);">👨‍🏫 Mark Entry Panel - <span id="tea-class-label"></span></h2>
-    <div class="card" style="overflow-x: auto;">
-        <table style="min-width: 1200px;">
+    <h2 style="color: var(--faculty);">👨‍🏫 Mark Entry - <span id="tea-class-label"></span></h2>
+    <div class="table-wrapper">
+        <table>
             <thead>
-                <tr class="sub-header">
-                    <th rowspan="2">ID</th><th rowspan="2">Student Name</th>
+                <tr>
+                    <th rowspan="2">ID</th><th rowspan="2">Student</th>
                     <th colspan="2">Bio(40)</th><th colspan="2">Phy(40)</th><th colspan="2">Che(40)</th><th colspan="2">Mal1(40)</th><th colspan="2">Hin(40)</th><th colspan="2">Eng(80)</th><th colspan="2">SS(80)</th><th colspan="2">Mat(80)</th><th colspan="2">IT(40)</th><th colspan="2">Mal2(40)</th>
                 </tr>
                 <tr>
@@ -119,99 +137,96 @@
             </thead>
             <tbody id="teacher-body"></tbody>
         </table>
-        <button class="btn btn-save" onclick="saveSubjectMarks()">Sync All Records</button>
     </div>
+    <button class="btn btn-save" style="padding:15px; font-size:1.1rem;" onclick="saveSubjectMarks()">💾 SAVE ALL MARKS</button>
 </div>
 
 <div id="student-dashboard" class="container">
     <div class="pdf-header">
-        <h1 style="margin:0;">RAC HIGHER SECONDARY SCHOOL, KATAMERI</h1>
-        <p style="margin:5px;">CE & Terminal Evaluation Progress Report</p>
+        <h1>RAC HIGHER SECONDARY SCHOOL, KATAMERI</h1>
+        <p>Annual Academic Progress Report</p>
     </div>
-
     <div style="display:flex; justify-content:space-between; align-items:center;" class="no-print">
-        <h2>Student Mark List</h2>
-        <button class="btn" style="background:#2c3e50; color:white;" onclick="window.print()">📥 Print PDF</button>
+        <h2>My Performance</h2>
+        <button class="btn" style="background:#2c3e50; color:white;" onclick="window.print()">📥 Print/Save PDF</button>
     </div>
-
     <div class="card">
         <p><b>Name:</b> <span id="rep-name"></span> | <b>ID:</b> <span id="rep-id"></span> | <b>Class:</b> <span id="rep-class"></span></p>
-        <table>
-            <thead>
-                <tr><th>Subject</th><th>Max Marks</th><th>CE Score</th><th>TE Score</th><th>Total</th><th>Status</th></tr>
-            </thead>
-            <tbody id="rep-subjects-body"></tbody>
-            <tfoot>
-                <tr style="font-weight:bold; background:#eee;">
-                    <td colspan="4">GRAND TOTAL</td><td id="rep-total"></td><td id="rep-status"></td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-
-    <div class="pdf-footer">
-        <div><p>Date: <span id="current-date"></span></p></div>
-        <div style="text-align: center;"><p>__________________________<br>Head of Institution</p></div>
+        <div class="table-wrapper" style="min-width: 100% !important; overflow: hidden;">
+            <table style="min-width: 100%;">
+                <thead><tr><th>Subject</th><th>Max</th><th>CE</th><th>TE</th><th>Total</th><th>Grade</th></tr></thead>
+                <tbody id="rep-subjects-body"></tbody>
+                <tfoot style="background:#f1f1f1; font-weight:bold;">
+                    <tr><td colspan="4">Grand Total (Out of 560)</td><td id="rep-total"></td><td id="rep-final-grade"></td></tr>
+                </tfoot>
+            </table>
+        </div>
+        <h3 style="margin-top:20px;">Final Status: <span id="rep-status"></span></h3>
     </div>
 </div>
 
 <script>
-    const subList = [
-        {key: 'bio', n: 'Biology', max: 40}, {key: 'phy', n: 'Physics', max: 40}, {key: 'che', n: 'Chemistry', max: 40},
-        {key: 'ma1', n: 'Malayalam/Arabic', max: 40}, {key: 'hin', n: 'Hindi', max: 40}, {key: 'eng', n: 'English', max: 80},
-        {key: 'soc', n: 'Social Science', max: 80}, {key: 'mat', n: 'Maths', max: 80}, {key: 'it', n: 'IT', max: 40}, {key: 'ma2', n: 'Malayalam 2', max: 40}
+    const subjects = [
+        {key:'bio', n:'Biology', max:40}, {key:'phy', n:'Physics', max:40}, {key:'che', n:'Chemistry', max:40},
+        {key:'ma1', n:'Mal/Arabic', max:40}, {key:'hin', n:'Hindi', max:40}, {key:'eng', n:'English', max:80},
+        {key:'soc', n:'Social Sci', max:80}, {key:'mat', n:'Maths', max:80}, {key:'it', n:'IT', max:40}, {key:'ma2', n:'Malayalam 2', max:40}
     ];
 
-    let users = JSON.parse(localStorage.getItem('racV11')) || [
-        { id: "master", pass: "999", name: "Admin", role: "master", class: "All" },
-        { id: "101", pass: "123", name: "Rahul K", role: "student", class: "10-A", 
-          marks: { 
-              bio:{ce:0, te:0}, phy:{ce:0, te:0}, che:{ce:0, te:0}, ma1:{ce:0, te:0}, 
-              hin:{ce:0, te:0}, eng:{ce:0, te:0}, soc:{ce:0, te:0}, mat:{ce:0, te:0}, 
-              it:{ce:0, te:0}, ma2:{ce:0, te:0} 
-          } 
-        }
+    let users = JSON.parse(localStorage.getItem('racHSS_Final')) || [
+        { id: "master", pass: "999", name: "Administrator", role: "master", class: "All" }
     ];
 
-    let loggedInUser = null;
+    let activeUser = null;
+
+    function getGrade(p) {
+        if(p >= 90) return "A+"; if(p >= 80) return "A"; if(p >= 70) return "B+";
+        if(p >= 60) return "B"; if(p >= 50) return "C+"; if(p >= 40) return "C";
+        if(p >= 30) return "D+"; return "F";
+    }
 
     function handleLogin() {
         const id = document.getElementById('userid').value;
         const pass = document.getElementById('password').value;
-        loggedInUser = users.find(u => u.id === id && u.pass === pass);
-        if(!loggedInUser) return alert("Failed");
+        activeUser = users.find(u => u.id === id && u.pass === pass);
+        if(!activeUser) return alert("Login Failed!");
+        
         document.getElementById('login-section').style.display = 'none';
-        if(loggedInUser.role === 'master') { document.getElementById('master-dashboard').style.display = 'block'; updateMasterTable(); }
-        else if(loggedInUser.role === 'faculty') { document.getElementById('teacher-dashboard').style.display = 'block'; document.getElementById('tea-class-label').innerText = loggedInUser.class; updateTeacherTable(); }
-        else { document.getElementById('student-dashboard').style.display = 'block'; showMarkList(loggedInUser); }
+        if(activeUser.role === 'master') { document.getElementById('master-dashboard').style.display='block'; updateMasterTable(); }
+        else if(activeUser.role === 'faculty') { 
+            document.getElementById('teacher-dashboard').style.display='block'; 
+            document.getElementById('tea-class-label').innerText = activeUser.class; updateTeacherTable(); 
+        } else { document.getElementById('student-dashboard').style.display='block'; showMarkList(activeUser); }
     }
 
     function updateMasterTable() {
         const body = document.getElementById('master-body'); body.innerHTML = "";
-        users.forEach((u, i) => { body.innerHTML += `<tr><td>${u.id}</td><td>${u.name}</td><td>${u.class}</td><td>${u.role}</td><td>${u.id !== 'master' ? `<button class="btn-del" onclick="deleteUser(${i})">Delete</button>` : '-'}</td></tr>`; });
+        users.forEach((u, i) => {
+            if(u.id !== 'master') body.innerHTML += `<tr><td>${u.id}</td><td>${u.name}</td><td>${u.class}</td><td>${u.role}</td><td><button class="btn-del" onclick="deleteUser(${i})">Del</button></td></tr>`;
+        });
     }
 
     function addUser() {
         const id = document.getElementById('new-id').value;
         const name = document.getElementById('new-name').value;
         const role = document.getElementById('new-role').value;
-        const cls = document.getElementById('new-class').value;
+        const fullClass = document.getElementById('new-class-num').value + "-" + document.getElementById('new-division').value;
         const pass = document.getElementById('new-pass').value;
-        const emptyMarks = {};
-        subList.forEach(s => emptyMarks[s.key] = {ce:0, te:0});
-        users.push({ id, name, role, class: cls, pass, marks: emptyMarks });
-        saveData(); updateMasterTable(); alert("Added!");
+        if(!id || !name) return alert("Fill Name and ID");
+
+        const mData = {}; subjects.forEach(s => mData[s.key] = {ce:0, te:0});
+        users.push({ id, name, role, class: fullClass, pass, marks: mData });
+        saveData(); updateMasterTable(); alert("Account Created!");
     }
 
-    function deleteUser(i) { users.splice(i, 1); saveData(); updateMasterTable(); }
+    function deleteUser(i) { if(confirm("Delete this user?")) { users.splice(i, 1); saveData(); updateMasterTable(); } }
 
     function updateTeacherTable() {
         const body = document.getElementById('teacher-body'); body.innerHTML = "";
-        users.filter(u => u.role === 'student' && u.class === loggedInUser.class).forEach(s => {
+        users.filter(u => u.role === 'student' && u.class === activeUser.class).forEach(s => {
             let row = `<tr><td>${s.id}</td><td>${s.name}</td>`;
-            subList.forEach(sub => { 
-                row += `<td><input type="number" id="ce-${sub.key}-${s.id}" value="${s.marks[sub.key].ce}"></td>`;
-                row += `<td><input type="number" id="te-${sub.key}-${s.id}" value="${s.marks[sub.key].te}"></td>`;
+            subjects.forEach(sub => {
+                row += `<td><input type="number" class="mark-input" id="ce-${sub.key}-${s.id}" value="${s.marks[sub.key].ce}"></td>
+                        <td><input type="number" class="mark-input" id="te-${sub.key}-${s.id}" value="${s.marks[sub.key].te}"></td>`;
             });
             body.innerHTML += row + `</tr>`;
         });
@@ -219,8 +234,8 @@
 
     function saveSubjectMarks() {
         users.forEach(u => {
-            if(u.role === 'student' && u.class === loggedInUser.class) {
-                subList.forEach(sub => { 
+            if(u.role === 'student' && u.class === activeUser.class) {
+                subjects.forEach(sub => {
                     u.marks[sub.key].ce = document.getElementById(`ce-${sub.key}-${u.id}`).value;
                     u.marks[sub.key].te = document.getElementById(`te-${sub.key}-${u.id}`).value;
                 });
@@ -233,35 +248,40 @@
         document.getElementById('rep-name').innerText = u.name;
         document.getElementById('rep-id').innerText = u.id;
         document.getElementById('rep-class').innerText = u.class;
-        let grandTotal = 0; let overallPass = true;
         const tbody = document.getElementById('rep-subjects-body'); tbody.innerHTML = "";
-        
-        subList.forEach(s => {
-            let ce = parseInt(u.marks[s.key].ce || 0);
-            let te = parseInt(u.marks[s.key].te || 0);
-            let total = ce + te;
-            grandTotal += total;
-            let passLimit = s.max * 0.3; // 30% Logic
-            let subPassed = total >= passLimit;
-            if(!subPassed) overallPass = false;
+        let gTotal = 0; let failed = false;
 
-            tbody.innerHTML += `
-                <tr>
-                    <td>${s.n}</td><td>${s.max}</td><td>${ce}</td><td>${te}</td><td>${total}</td>
-                    <td class="${subPassed ? '' : 'fail-text'}">${subPassed ? 'PASSED' : 'FAILED'}</td>
-                </tr>`;
+        subjects.forEach(s => {
+            const ce = parseInt(u.marks[s.key].ce || 0); const te = parseInt(u.marks[s.key].te || 0);
+            const tot = ce + te; gTotal += tot; const per = (tot / s.max) * 100;
+            if(per < 30) failed = true;
+            tbody.innerHTML += `<tr><td>${s.n}</td><td>${s.max}</td><td>${ce}</td><td>${te}</td><td>${tot}</td><td class="${per<30?'fail':'pass'}">${getGrade(per)}</td></tr>`;
         });
-
-        document.getElementById('rep-total').innerText = grandTotal;
+        document.getElementById('rep-total').innerText = gTotal;
+        document.getElementById('rep-final-grade').innerText = getGrade((gTotal/560)*100);
         const status = document.getElementById('rep-status');
-        status.innerText = overallPass ? "ELIGIBLE" : "NHS (FAILED)";
-        status.style.color = overallPass ? "green" : "red";
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString();
+        status.innerText = failed ? "NOT ELIGIBLE FOR HIGHER STUDIES (NHS)" : "ELIGIBLE FOR HIGHER STUDIES";
+        status.className = failed ? "fail" : "pass";
     }
 
-    function saveData() { localStorage.setItem('racV11', JSON.stringify(users)); }
+    function saveData() { localStorage.setItem('racHSS_Final', JSON.stringify(users)); }
+
+    function exportData() {
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(JSON.stringify(users));
+        const link = document.createElement('a');
+        link.setAttribute('href', dataUri);
+        link.setAttribute('download', 'RAC_HSS_Backup.json');
+        link.click();
+    }
+
+    function importData(event) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            users = JSON.parse(e.target.result);
+            saveData(); updateMasterTable(); alert("Data Restored!");
+        };
+        reader.readAsText(event.target.files[0]);
+    }
 </script>
 </body>
 </html>
-
-
